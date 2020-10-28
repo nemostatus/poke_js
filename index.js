@@ -7,11 +7,16 @@ const eventHandler = () => {
       .then(resp => resp.json())
       .then(data => {
         console.log(data.results)
-  
-        pokemon.innerHTML += `<h1>Choose 3 pokemon to battle</h1>
+        pokemon.innerHTML += `
+     <h1>Choose 3 pokemon to battle, click find enemy, start battle!</h1>
+   
         <button onClick = "getRandom3()">
-        Start your pokemon battle!
-       </button>`
+      Find your enemy !
+       </button>
+
+       <button onClick = "battle()">
+        Start pokemon battle!
+          </button> `
         for (let i = 0; i < data.results.length; i++) {
           pokemon.innerHTML += `
   
@@ -40,13 +45,10 @@ if(yourTeam.length === 3){
         let selected = shuffled.slice(17);
         console.log(selected)
         for (let i = 0; i < selected.length; i++){
-            
-            return getEnemyXP(selected[i].url)
+            getEnemyXP(selected[i].url)
+           
         }
-      
-   battle()
-
-      })}
+    })}
       else {
           alert("Make sure you only choose 3 pokemon then start battle.")
       }
