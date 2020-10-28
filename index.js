@@ -15,17 +15,19 @@ const eventHandler = () => {
         for (let i = 0; i < data.results.length; i++) {
           pokemon.innerHTML += `
   
-   <ul><li onClick = "getXP('${data.results[i].url}')"> ${data.results[i].name}</li> </ul>`
+   <ul><li onClick = "getYourXP('${data.results[i].url}')"> ${data.results[i].name}</li> </ul>`
         }
       }
       )
   }
   
-  const getXP = (url) => {
+  const getYourXP = (url) => {
     fetch(url)
       .then(resp => resp.json())
       .then(data => {
-          data.base_experience
+        yourTeam.push({name: data.name,
+        experience: data.base_experience})
+        console.log("your",yourTeam)
         })
   }
 
@@ -36,12 +38,31 @@ if(yourTeam.length === 3){
     .then(data => {
         const shuffled = data.results.sort(() => 0.5 - Math.random());
         let selected = shuffled.slice(17);
-      console.log(selected)})}
+        console.log(selected)
+        for(let enemy of selected){
+            getEnemyXP(enemy.url)
+      }
+            console.log(enemyTeam)
+            //compare reduced xp, whichever nums bigger write prompt using object data
+            
+
+      })}
       else {
           alert("Make sure you only choose 3 pokemon then start battle.")
       }
       //loop get 
     }
+
+
+    const getEnemyXP = (url) => {
+        fetch(url)
+          .then(resp => resp.json())
+          .then(data => {
+            enemyTeam.push({name: data.name,
+            experience: data.base_experience})
+            console.log("enemy",enemyTeam)
+            })
+      }
 
   
   
