@@ -39,12 +39,12 @@ if(yourTeam.length === 3){
         const shuffled = data.results.sort(() => 0.5 - Math.random());
         let selected = shuffled.slice(17);
         console.log(selected)
-        for(let enemy of selected){
-            getEnemyXP(enemy.url)
-      }
-            console.log(enemyTeam)
-            //compare reduced xp, whichever nums bigger write prompt using object data
+        for (let i = 0; i < selected.length; i++){
             
+            return getEnemyXP(selected[i].url)
+        }
+      
+   battle()
 
       })}
       else {
@@ -62,6 +62,24 @@ if(yourTeam.length === 3){
             experience: data.base_experience})
             console.log("enemy",enemyTeam)
             })
+      }
+
+      const battle = () =>{
+          console.log("work!",enemyTeam)
+        let enemyXpProp = enemyTeam.map(x => x.experience)
+        console.log("test",enemyTeam)
+        //compare reduced xp, whichever nums bigger write prompt using object data
+        let yourXpProp = yourTeam.map(x => x.experience)
+     
+        console.log("both",yourXpProp, enemyXpProp  )
+       let yourxp =  yourXpProp.reduce(reducer) // 
+       let enemyxp = enemyXpProp.reduce(reducer)
+       if(yourxp > enemyxp){
+           alert("you win")
+            }
+            else{
+                alert("you lose")
+            }
       }
 
   
