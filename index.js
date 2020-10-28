@@ -1,3 +1,6 @@
+let enemyTeam = []
+let yourTeam = []
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const eventHandler = () => {
     let pokemon = document.getElementById("pokemon")
     fetch('https://pokeapi.co/api/v2/pokemon')
@@ -5,7 +8,10 @@ const eventHandler = () => {
       .then(data => {
         console.log(data.results)
   
-        pokemon.innerHTML += `<h1>Choose 3 pokemon to battle</h1>`
+        pokemon.innerHTML += `<h1>Choose 3 pokemon to battle</h1>
+        <button onClick = "getRandom3()">
+        Start your pokemon battle!
+       </button>`
         for (let i = 0; i < data.results.length; i++) {
           pokemon.innerHTML += `
   
@@ -18,17 +24,23 @@ const eventHandler = () => {
   const getXP = (url) => {
     fetch(url)
       .then(resp => resp.json())
-      .then(data => {console.log(data)})
+      .then(data => {
+          data.base_experience
+        })
   }
 
   const getRandom3 =  () => {
-
+if(yourTeam.length === 3){
     fetch('https://pokeapi.co/api/v2/pokemon')
     .then(resp => resp.json())
     .then(data => {
         const shuffled = data.results.sort(() => 0.5 - Math.random());
-        let selected = shuffled.slice(0, n);
-      console.log(selected)})
+        let selected = shuffled.slice(17);
+      console.log(selected)})}
+      else {
+          alert("Make sure you only choose 3 pokemon then start battle.")
+      }
+      //loop get 
     }
 
   
