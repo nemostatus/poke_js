@@ -16,7 +16,12 @@ const eventHandler = () => {
 
        <button onClick = "battle()">
         Start pokemon battle!
-          </button> `
+          </button> 
+          
+          <button onClick = "clearRoster()">
+          Choose new team!
+          </button> 
+          `
         for (let i = 0; i < data.results.length; i++) {
           pokemon.innerHTML += `
   
@@ -84,9 +89,13 @@ const eventHandler = () => {
                 alert(`You lost against ${enemyNameProp} with ${yourNameProp}   `)
             }}
             else {
-              alert(`Make sure you only choose 3 pokemon then start battle. You selected ${yourTeam.length} `)
+              alert(`Make sure you only choose 3 pokemon then start battle. You selected ${yourTeam.length}.Select 'choose new team' if you need a new team `)
           }
-      }
+        }
+
+        const clearRoster = () => {
+          yourTeam =[]
+        }
 
   
   
