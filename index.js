@@ -10,7 +10,7 @@ const eventHandler = () => {
       .then(data => {
         // console.log(data.results)
         pokemon.innerHTML += `
-     <h1>Choose 3 pokemon to battle and start battle!</h1>
+     <h1>Choose 3 pokemon to start battle !</h1>
    
   
 
