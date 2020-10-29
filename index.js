@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", ()=>{ getRandom3()})
+
 let enemyTeam = []
 let yourTeam = []
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -6,13 +8,11 @@ const eventHandler = () => {
     fetch('https://pokeapi.co/api/v2/pokemon')
       .then(resp => resp.json())
       .then(data => {
-        console.log(data.results)
+        // console.log(data.results)
         pokemon.innerHTML += `
-     <h1>Choose 3 pokemon to battle, click find enemy, start battle!</h1>
+     <h1>Choose 3 pokemon to battle and start battle!</h1>
    
-        <button onClick = "getRandom3()">
-      Find your enemy !
-       </button>
+  
 
        <button onClick = "battle()">
         Start pokemon battle!
@@ -32,28 +32,27 @@ const eventHandler = () => {
       .then(data => {
         yourTeam.push({name: data.name,
         experience: data.base_experience})
-        console.log("your",yourTeam)
+        // console.log("your",yourTeam)
         })
   }
 
   const getRandom3 =  () => {
-if(yourTeam.length === 3){
+// if(yourTeam.length === 3){
+  console.log("Test")
     fetch('https://pokeapi.co/api/v2/pokemon')
     .then(resp => resp.json())
     .then(data => {
         const shuffled = data.results.sort(() => 0.5 - Math.random());
         let selected = shuffled.slice(17);
-        console.log(selected)
+        // console.log(selected)
         for (let i = 0; i < selected.length; i++){
             getEnemyXP(selected[i].url)
            
         }
     })}
-      else {
-          alert("Make sure you only choose 3 pokemon then start battle.")
-      }
+     
       //loop get 
-    }
+    
 
 
     const getEnemyXP = (url) => {
@@ -62,26 +61,31 @@ if(yourTeam.length === 3){
           .then(data => {
             enemyTeam.push({name: data.name,
             experience: data.base_experience})
-            console.log("enemy",enemyTeam)
+            // console.log("enemy",enemyTeam)
             })
       }
 
       const battle = () =>{
-          console.log("work!",enemyTeam)
+          // console.log("work!",enemyTeam)
+          if(yourTeam.length === 3){
         let enemyXpProp = enemyTeam.map(x => x.experience)
-        console.log("test",enemyTeam)
+        // console.log("test",enemyTeam)
         //compare reduced xp, whichever nums bigger write prompt using object data
         let yourXpProp = yourTeam.map(x => x.experience)
-     
-        console.log("both",yourXpProp, enemyXpProp  )
+        let enemyNameProp = enemyTeam.map(x => x.name)
+        let yourNameProp = yourTeam.map(x => x.name)
+        // console.log("both",yourXpProp, enemyXpProp  )
        let yourxp =  yourXpProp.reduce(reducer) // 
        let enemyxp = enemyXpProp.reduce(reducer)
        if(yourxp > enemyxp){
-           alert("you win")
+           alert(`You win with ${yourNameProp} against ${enemyNameProp}`)
             }
             else{
-                alert("you lose")
-            }
+                alert(`You lost against ${enemyNameProp} with ${yourNameProp}   `)
+            }}
+            else {
+              alert(`Make sure you only choose 3 pokemon then start battle. You selected ${yourTeam.length} `)
+          }
       }
 
   
