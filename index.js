@@ -25,7 +25,7 @@ const eventHandler = () => {
         for (let i = 0; i < data.results.length; i++) {
           pokemon.innerHTML += `
   
-   <ul><li onClick = "getYourXP('${data.results[i].url}')"> ${data.results[i].name}</li> </ul>`
+   <ul><li tabindex=1 onClick = "getYourXP('${data.results[i].url}')"> ${data.results[i].name}</li> </ul>`
         }
       }
       )
